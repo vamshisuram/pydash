@@ -1,0 +1,21 @@
+# Python specific
+*.pyc
+__pycache__/
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Flask specific
+instance/
+__init__.py
+
+# IDE specific
+.idea/
+.vscode/
+
+# Environment specific
+venv/
+.venv/
+env/
