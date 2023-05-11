@@ -5,7 +5,7 @@ pip install Flask
 
 pip install <package> --upgrade && pip freeze > requirements.txt
 pip install flask-mysql --upgrade && pip freeze > requirements.txt
-pip install mysql --upgrade && pip freeze > requirements.txt
+pip install mysql-connector-python --upgrade && pip freeze > requirements.txt
 
 mysql -u username -p
 source /path/to/load_script.sql
