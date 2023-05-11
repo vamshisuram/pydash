@@ -28,6 +28,10 @@ def execute():
     payload = request.get_data(parse_form_data=True)
     print('payload', payload)
 
+    # parse and evaluate the script
+    # invoke subprocess and take results
+    exec(payload.decode())
+
     statement = '''
       SELECT * FROM Employees;
     '''
