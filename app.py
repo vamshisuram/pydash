@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
@@ -21,15 +21,13 @@ class Employees(db.Model):
         return f'EmployeeID: {self.EmployeeID}, FirstName: {self.FirstName}'
 
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
-
-@app.route("/execute", methods=('GET', 'POST'))
+@app.route("/", methods=('GET', 'POST'))
 def execute():
     # employees = Employees.query.all()
     # return jsonify([employee.as_dict() for employee in employees])
+    payload = request.get_data(parse_form_data=True)
+    print('payload', payload)
+
     statement = '''
       SELECT * FROM Employees;
     '''
@@ -41,4 +39,5 @@ def execute():
 
 
 if __name__ == '__main__':
-    app.run()
+    # app.run()
+    app.run(debug=True)
