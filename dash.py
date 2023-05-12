@@ -12,9 +12,9 @@ def main():
     if st.button('Run'):
         data = requests.post("http://127.0.0.1:5000/", data=script,
                              headers={"Content-Type": "application/json"})
-        print("data: ", data)
+        print("data: ", data.json())
         print("script: ", script)
-        st.write(data)
+        st.write(data.json())
 
 
 if __name__ == '__main__':

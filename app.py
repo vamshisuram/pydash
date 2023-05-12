@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
+import subprocess
+import pathlib as path
 
 app = Flask(__name__)
 DB_USER = 'root'
@@ -30,7 +32,14 @@ def execute():
 
     # parse and evaluate the script
     # invoke subprocess and take results
-    exec(payload.decode())
+    # exec(payload.decode())
+    content = payload.decode()
+    result = None
+    with open('temp.py', 'w') as file:
+        file.write(content)
+        result = subprocess.run(["python", "temp.py"],
+                                capture_output=True, text=True, check=True)
+    print("result >> ", result.stdout)
 
     statement = '''
       SELECT * FROM Employees;
