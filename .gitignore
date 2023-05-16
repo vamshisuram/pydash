@@ -1,3 +1,7 @@
+
+temp/
+
+
 # Python specific
 *.pyc
 __pycache__/

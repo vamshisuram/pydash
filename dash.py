@@ -1,6 +1,7 @@
 
 import streamlit as st
 import requests
+import pandas as pd
 
 
 def main():
@@ -15,6 +16,8 @@ def main():
         print("data: ", data.json())
         print("script: ", script)
         st.write(data.json())
+        df = pd.DataFrame(data.json()['data'])
+        st.bar_chart(df)
 
 
 if __name__ == '__main__':
