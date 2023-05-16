@@ -25,9 +25,10 @@ def execute():
     content = payload.decode()
     try:
         result = None
-        filepath = 'temp/temp.py'  # + str(time.time()) + '.py'
+        filepath = 'temp/temp' + str(time.time()) + '.py'
+        with open(filepath, 'w') as file:
+            file.write(content)
         with open(filepath, 'r') as file:
-            # file.write(content)
             result = subprocess.run(["python", filepath],
                                     capture_output=True, text=True, check=True)
             response = {"data": json.loads(result.stdout.replace("'", '"'))}
