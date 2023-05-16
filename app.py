@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text
 import subprocess
-import pathlib as path
+import json
+import time
 
 app = Flask(__name__)
 DB_USER = 'root'
@@ -18,37 +18,23 @@ class Employees(db.Model):
     EmployeeID = db.Column(db.Integer, primary_key=True)
     FirstName = db.Column(db.String(50))
 
-    def __str__(self):
-        # return json.dumps(dict(self), ensure_ascii=False)
-        return f'EmployeeID: {self.EmployeeID}, FirstName: {self.FirstName}'
-
 
 @app.route("/", methods=('GET', 'POST'))
 def execute():
-    # employees = Employees.query.all()
-    # return jsonify([employee.as_dict() for employee in employees])
     payload = request.get_data(parse_form_data=True)
-    print('payload', payload)
-
-    # parse and evaluate the script
-    # invoke subprocess and take results
-    # exec(payload.decode())
     content = payload.decode()
-    result = None
-    with open('temp.py', 'w') as file:
-        file.write(content)
-        result = subprocess.run(["python", "temp.py"],
-                                capture_output=True, text=True, check=True)
-    print("result >> ", result.stdout)
-
-    statement = '''
-      SELECT * FROM Employees;
-    '''
-    with db.engine.connect() as conn:
-        results = conn.execute(text(statement)).fetchall()
-        results = [tuple(row) for row in results]
-        # results = [tuple(row) for row in results]
-    return jsonify(dict(data=results))    # data contains dataframe!
+    try:
+        result = None
+        filepath = 'temp/temp.py'  # + str(time.time()) + '.py'
+        with open(filepath, 'r') as file:
+            # file.write(content)
+            result = subprocess.run(["python", filepath],
+                                    capture_output=True, text=True, check=True)
+            response = {"data": json.loads(result.stdout.replace("'", '"'))}
+            return jsonify(response)
+    except Exception as e:
+        print(e)
+        return None
 
 
 if __name__ == '__main__':
