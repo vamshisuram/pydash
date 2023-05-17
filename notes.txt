@@ -9,3 +9,9 @@ pip install mysql-connector-python --upgrade && pip freeze > requirements.txt
 
 mysql -u username -p
 source /path/to/load_script.sql
+
+
+pip install flask --upgrade && pip freeze > requirements.txt
+pip install Flask-SQLAlchemy --upgrade && pip freeze > requirements.txt
+
+

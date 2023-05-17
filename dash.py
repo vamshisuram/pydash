@@ -13,8 +13,8 @@ def main():
     if st.button('Run'):
         data = requests.post("http://127.0.0.1:5000/", data=script,
                              headers={"Content-Type": "application/json"})
-        print("data: ", data.json())
-        print("script: ", script)
+        print("DASH >>> \n data: ", data.json())
+        print("DASH >>> \n script: ", script)
         st.write(data.json())
         df = pd.DataFrame(data.json()['data'])
         st.bar_chart(df)

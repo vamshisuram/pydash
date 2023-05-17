@@ -1,10 +1,9 @@
 import mysql.connector as sql
-import pandas as pd
 
 conn = sql.connect(
-    host="localhost",
-    user="root",
-    password="",
+    host="db",   # db will be the alias for docker ip address else localhost
+    user="regular",
+    password="pass",
     database="employee"
 )
 

@@ -1,0 +1,33 @@
+version: "2"
+services:
+  app:
+    build: ./app
+    links:
+      - db
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+  # db:
+  #   platform: linux/x86_64
+  #   image: mysql:5.7
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #   volumes:
+  #     - ./db:/docker-entrypoint-initdb.d/:ro
+  db:
+    image: mysql:8.0.26
+    platform: linux/x86_64
+    restart: always
+    environment:
+      MYSQL_DATABASE: employee
+      MYSQL_USER: regular
+      MYSQL_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: pass
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
+      # - ./dbdata:/var/lib/mysql
+    ports:
+      - '3306:3306'

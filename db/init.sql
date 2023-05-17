@@ -16,3 +16,6 @@ VALUES ('John', 'Doe', 'john.doe@email.com', '123-456-7890', 60000),
        ('Bob', 'Jones', 'bob.jones@email.com', '111-222-3333', 50000),
        ('Sarah', 'Lee', 'sarah.lee@email.com', '444-444-4444', 80000),
        ('Mike', 'Smith', 'mike.smith@email.com', '777-777-7777', 65000);
+
+CREATE USER 'regular'@'localhost' IDENTIFIED BY 'pass';
+GRANT ALL PRIVILEGES ON employee.* TO 'regular'@'localhost';
