@@ -15,3 +15,4 @@ pip install flask --upgrade && pip freeze > requirements.txt
 pip install Flask-SQLAlchemy --upgrade && pip freeze > requirements.txt
 
 
+pip install streamlit requests pandas --upgrade && pip freeze > requirements.txt

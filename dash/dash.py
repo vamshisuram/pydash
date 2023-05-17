@@ -11,8 +11,10 @@ def main():
     script = st.text_area('Script', 'print("Hello, world!")', height=200)
 
     if st.button('Run'):
-        data = requests.post("http://127.0.0.1:5000/", data=script,
+        data = requests.post("http://app:5000/", data=script,
                              headers={"Content-Type": "application/json"})
+        # data = requests.post("http://127.0.0.1:5000/", data=script,
+        #                      headers={"Content-Type": "application/json"})
         print("DASH >>> \n data: ", data.json())
         print("DASH >>> \n script: ", script)
         st.write(data.json())
